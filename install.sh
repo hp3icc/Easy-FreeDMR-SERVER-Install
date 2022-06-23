@@ -592,5 +592,6 @@ if __name__ == '__main__':
  
 EOF
 ###################
-sudo timedatectl set-timezone America/Panama
+chmod +x /bin/menu*
+menu-fdmr
 #####
