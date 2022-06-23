@@ -145,7 +145,7 @@ echo 123> /opt/FDMR-Monitor/data/123.json && sudo systemctl stop fdmr_mon.servic
 11)
 menu-igate ;;
 12)
-menu-update;
+sh -c "$(curl -fsSL https://github.com/hp3icc/Easy-FreeDMR-SERVER/raw/main/update.sh)";
 esac
 done
 exit 0
