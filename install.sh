@@ -487,7 +487,8 @@ sudo rm /opt/FDMR-Monitor/data/*.json
 cd /opt/FDMR-Monitor/
 sudo rm /opt/FDMR-Monitor/install.sh
 wget https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/install.sh
-chmod +x /opt/FDMR-Monitor/install.sh
+sudo chmod +x /opt/FDMR-Monitor/install.sh
+sudo chmod +x /opt/FDMR-Monitor/*.py
 #
 sh /opt/FDMR-Monitor/install.sh
 sudo sh /opt/extra-2.sh
