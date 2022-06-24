@@ -591,7 +591,53 @@ if __name__ == '__main__':
   
  
 EOF
+###
+sudo cat > /opt/obp.txt <<- "EOF"
+ 
+#Coloque abajo su lista de obp
+ 
+ 
+EOF
+##########################################
+sudo cat > /opt/extra-1.sh <<- "EOF"
+######################################################################
+# Coloque en este archivo, cualquier instruccion shell adicional que # 
+# quierre se realice al finalizar la actualizacion.                  #
+######################################################################
+ 
+  
+
+
+EOF
+# 
+cp /opt/extra-1.sh /opt/extra-2.sh
+cp /opt/extra-1.sh /opt/extra-3.sh
+cp /opt/extra-1.sh /opt/extra-4.sh
+cp /opt/extra-1.sh /opt/extra-5.sh
+cp /opt/extra-1.sh /opt/extra-6.sh
+chmod +x /opt/extra-*
 ###################
+sudo cat > /opt/rules.txt <<- "EOF"
+ 
+BRIDGES = {
+ 
+ '9990': [ 
+{'SYSTEM': 'EchoTest',          'TS': 2, 'TGID': 9990, 'ACTIVE':True, 'TIMEOUT': 0, 'TO_TYPE': 'NONE', 'ON': [], 'OFF': [], 'RESET': []}, 
+ 
+],
+ 
+ 
+ 
+}
+if __name__ == '__main__':
+    from pprint import pprint
+    pprint(BRIDGES)
+ 
+  
+ 
+EOF
+###################
+##################
 chmod +x /bin/menu*
 menu-fdmr
 #####
