@@ -671,8 +671,8 @@ systemctl start freedmr.service
 systemctl enable freedmr.service
 systemctl start proxy.service
 systemctl enable proxy.service
-systemctl start parrot.service
-systemctl enable parrot.service
+systemctl start fdmrparrot.service
+systemctl enable fdmrparrot.service
 sudo rm /opt/FDMR-Monitor/data/*.json
 sudo rm /opt/FDMR-Monitor/sysinfo/*.rrd
 sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh
