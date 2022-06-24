@@ -145,7 +145,7 @@ echo 123> /opt/FDMR-Monitor/data/123.json && sudo systemctl stop fdmr_mon.servic
 11)
 menu-igate ;;
 12)
-sh -c "$(curl -fsSL https://github.com/hp3icc/Easy-FreeDMR-SERVER/raw/main/update.sh)";
+sh -c "$(curl -fsSL https://github.com/hp3icc/Easy-FreeDMR-SERVER-Install/raw/main/update.sh)";
 esac
 done
 exit 0
@@ -493,7 +493,6 @@ sh /opt/FDMR-Monitor/install.sh
 sudo sh /opt/extra-2.sh
 #####################
 sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/hotspot_proxy_v2.py
-sudo sed -i "s/54100/54060/g"  /opt/FreeDMR/hotspot_proxy_v2.py
 sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/hotspot_proxy_v2.py
 sudo sed -i "s/\/freedmr.cfg/\/config\/FreeDMR.cfg/g"  /opt/FreeDMR/hotspot_proxy_v2.py
 sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/proxy_db.py
