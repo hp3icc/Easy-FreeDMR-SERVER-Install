@@ -374,19 +374,38 @@ commands="CREATE DATABASE \`${newDb}\`;CREATE USER '${newUser}'@'${host}' IDENTI
 
 #cho "${commands}" | /usr/bin/mysql -u root -p
 echo "${commands}" | /usr/bin/mysql -u root
+#
+sudo cat > /opt/obp.txt <<- "EOF"
+ 
+#Coloque abajo su lista de obp
+ 
+ 
+EOF
+##########################################
+sudo cat > /opt/extra-1.sh <<- "EOF"
+######################################################################
+# Coloque en este archivo, cualquier instruccion shell adicional que # 
+# quierre se realice al finalizar la actualizacion.                  #
+######################################################################
+ 
+  
+
+
+EOF
+# 
+cp /opt/extra-1.sh /opt/extra-2.sh
+cp /opt/extra-1.sh /opt/extra-3.sh
+cp /opt/extra-1.sh /opt/extra-4.sh
+cp /opt/extra-1.sh /opt/extra-5.sh
+cp /opt/extra-1.sh /opt/extra-6.sh
+chmod +x /opt/extra-*
+#
 #fdmr-monitor
 cd /opt
 sudo git clone https://github.com/yuvelq/FDMR-Monitor.git
 cd FDMR-Monitor
 sudo git checkout Self_Service
-sudo chmod +x install.sh
-#sudo ./install.sh
-#sudo cp fdmr-mon_SAMPLE.cfg fdmr-mon.cfg
 sudo sed -i 's/RELOAD_TIME = 15/RELOAD_TIME = 1/' /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
-#sudo cp utils/logrotate/fdmr_mon /etc/logrotate.d/
-rm /etc/logrotate.d/fdmr_mon
-rm /lib/systemd/system/fdmr_mon.service
-#sudo cp utils/systemd/fdmr_mon.service /lib/systemd/system/
 sudo sed -i 's/FREQUENCY = 10/FREQUENCY = 60/' /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
 sudo chmod 644 /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
 sed '33 a <!--' -i /opt/FDMR-Monitor/html/sysinfo.php
@@ -402,8 +421,6 @@ sudo sed -i "s/HBMonv2/FDMR-Monitor/g"  /opt/FDMR-Monitor/sysinfo/*.sh
 sudo chmod +x /opt/FDMR-Monitor/sysinfo/cpu.sh
 sudo chmod +x /opt/FDMR-Monitor/sysinfo/graph.sh
 sudo chmod +x /opt/FDMR-Monitor/sysinfo/rrd-db.sh
-
-#sudo chmod +x /opt/FDMR-Monitor/updateTGIDS.sh
 #
 sudo cat > /opt/FDMR-Monitor/html/buttons.php <<- "EOF"
 <!-- HBMonitor buttons HTML code -->
@@ -482,8 +499,6 @@ sudo cat > /opt/FDMR-Monitor/html/buttons.php <<- "EOF"
 EOF
 
 #
-
-#sudo sed -i "s/opt\/FreeDMR\/freedmr.cfg/opt\/FreeDMR\/config\/FreeDMR.cfg/g"  /opt/FDMR-Monitor/install.sh
 
 sudo systemctl daemon-reload
 
@@ -592,30 +607,7 @@ if __name__ == '__main__':
  
 EOF
 ###
-sudo cat > /opt/obp.txt <<- "EOF"
- 
-#Coloque abajo su lista de obp
- 
- 
-EOF
-##########################################
-sudo cat > /opt/extra-1.sh <<- "EOF"
-######################################################################
-# Coloque en este archivo, cualquier instruccion shell adicional que # 
-# quierre se realice al finalizar la actualizacion.                  #
-######################################################################
- 
-  
 
-
-EOF
-# 
-cp /opt/extra-1.sh /opt/extra-2.sh
-cp /opt/extra-1.sh /opt/extra-3.sh
-cp /opt/extra-1.sh /opt/extra-4.sh
-cp /opt/extra-1.sh /opt/extra-5.sh
-cp /opt/extra-1.sh /opt/extra-6.sh
-chmod +x /opt/extra-*
 ###################
 sudo cat > /opt/rules.txt <<- "EOF"
  
@@ -637,7 +629,73 @@ if __name__ == '__main__':
  
 EOF
 ###################
+sudo cat > /lib/systemd/system/proxy.service <<- "EOF"
+[Unit]
+Description= Proxy Service 
+
+After=multi-user.target
+
+
+[Service]
+User=root
+#WorkingDirectory=/opt/FreeDMR
+ExecStart=/usr/bin/python3 /opt/FreeDMR/hotspot_proxy_v2.py
+
+[Install]
+WantedBy=multi-user.target
+
+EOF
+#########
+sudo cat > /lib/systemd/system/freedmr.service <<- "EOF"
+[Unit]
+Description=FreeDmr
+
+After=multi-user.target
+
+[Service]
+User=root
+#ExecStartPre=/bin/sleep 30
+ExecStart=/usr/bin/python3 /opt/FreeDMR/bridge_master.py -c /opt/FreeDMR/config/FreeDMR.cfg -r /opt/FreeDMR/config/rules.py
+
+
+
+[Install]
+WantedBy=multi-user.target
+
+EOF
+###
+sudo cat > /lib/systemd/system/fdmrparrot.service <<- "EOF"
+[Unit]
+
+Description=Freedmr Parrot
+
+After=network-online.target syslog.target
+
+Wants=network-online.target
+
+[Service]
+
+StandardOutput=null
+
+WorkingDirectory=/opt/FreeDMR
+
+RestartSec=3
+
+ExecStart=/usr/bin/python3 /opt/FreeDMR/playback.py -c /opt/FreeDMR/playback.cfg
+#/usr/bin/python3 /opt/HBlink3/playback.py -c /opt/HBlink3/playback.cfg
+
+Restart=on-abort
+
+[Install]
+
+WantedBy=multi-user.target
+
+EOF
+#
+
 ##################
+sudo systemctl daemon-reload
+echo 123> /opt/FDMR-Monitor/data/123.json && sudo systemctl stop fdmr_mon.service && sudo rm /opt/FDMR-Monitor/data/*.json && sudo rm /opt/FDMR-Monitor/sysinfo/*.rrd && sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh && cronedit.sh '*/5 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/graph.sh' add && cronedit.sh '*/2 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/cpu.sh' add && sudo systemctl enable fdmr_mon.service && sudo systemctl restart apache2.service && sudo systemctl enable apache2.service && sudo systemctl start fdmr_mon.service && cronedit.sh '0 3 * * *' 'rm /opt/FDMR-Monitor/data/*' add && cronedit.sh '5 3 * * *' 'systemctl restart fdmr_mon.service' add
 chmod +x /bin/menu*
 menu-fdmr
 #####
