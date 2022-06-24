@@ -50,7 +50,7 @@ case $choix in
 1)
 sudo nano /opt/extra-2.sh && chmod +x /opt/extra* ;;
 2)
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/selfservice-update.sh)" ;;
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/selfservice-update.sh)" ;;
 3)
 break;
 esac
