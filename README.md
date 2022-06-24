@@ -48,6 +48,43 @@ To integrate your server to the freedmr network, you must contact the telegram g
         
  #
  
+ #
+ 
+ # Location files config :
+ 
+  * FreeDMR Server 
+   /opt/FreeDMR/config/FreeDMR.cfg
+   
+  * FreeDMR Rules
+   /opt/FreeDMR/config/FreeDMR.cfg
+   
+  * FDMR-Monitor
+   /opt/FDMR-Monitor/fdmr-mon.cfg 
+   
+  #
+  
+  # Systemctl Services :
+  
+  * Freedmr
+   freedmr.service
+   
+  * FreeDMR Proxy
+   proxy.service
+   
+  * FreeDMR Parrot
+   fdmrparrot.service
+  
+  * FDMR-Monitor
+   fdmr_mon.service
+  
+ #
+  
+ # Dashboard Files
+ 
+ /var/www/html/
+
+#
+
  # Sources :
  
  * https://gitlab.hacknix.net/hacknix/FreeDMR
