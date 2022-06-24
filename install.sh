@@ -693,10 +693,10 @@ systemctl enable fdmrparrot.service
 sudo rm /opt/FDMR-Monitor/data/*.json
 sudo rm /opt/FDMR-Monitor/sysinfo/*.rrd
 sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh
-(crontab -l; echo "*/5 * * * * sync ; echo 3 > sh /opt/FDMR-Monitor/sysinfo/graph.sh")|awk '!x[$0]++'|crontab -
-(crontab -l; echo "*/2 * * * * sync ; echo 3 > sh /opt/FDMR-Monitor/sysinfo/cpu.sh")|awk '!x[$0]++'|crontab -
-(crontab -l; echo "0 3 * * * sync ; echo 3 > rm /opt/FDMR-Monitor/data/*")|awk '!x[$0]++'|crontab -
-(crontab -l; echo "5 3 * * * sync ; echo 3 > systemctl restart fdmr_mon.service")|awk '!x[$0]++'|crontab -
+(crontab -l; echo "*/5 * * * * sh /opt/FDMR-Monitor/sysinfo/graph.sh")|awk '!x[$0]++'|crontab -
+(crontab -l; echo "*/2 * * * * sh /opt/FDMR-Monitor/sysinfo/cpu.sh")|awk '!x[$0]++'|crontab -
+(crontab -l; echo "0 3 * * * rm /opt/FDMR-Monitor/data/*")|awk '!x[$0]++'|crontab -
+(crontab -l; echo "5 3 * * * systemctl restart fdmr_mon.service")|awk '!x[$0]++'|crontab -
 sudo systemctl enable fdmr_mon.service
 sudo systemctl restart apache2.service
 sudo systemctl enable apache2.service
