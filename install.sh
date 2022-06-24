@@ -671,6 +671,7 @@ rm /var/log/syslog*
 rm /var/log/*.log*
 
 (crontab -l; echo "* */1 * * * sync ; echo 3 > /proc/sys/vm/drop_caches >/dev/null 2>&1")|awk '!x[$0]++'|crontab -
+
 #####
 sudo update-rc.d dphys-swapfile remove
 sudo chmod -x /etc/init.d/dphys-swapfile
@@ -692,15 +693,14 @@ systemctl enable fdmrparrot.service
 sudo rm /opt/FDMR-Monitor/data/*.json
 sudo rm /opt/FDMR-Monitor/sysinfo/*.rrd
 sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh
-
-cronedit.sh '*/5 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/graph.sh' add
-cronedit.sh '*/2 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/cpu.sh' add
+(crontab -l; echo "*/5 * * * * sync ; echo 3 > sh /opt/FDMR-Monitor/sysinfo/graph.sh")|awk '!x[$0]++'|crontab -
+(crontab -l; echo "*/2 * * * * sync ; echo 3 > sh /opt/FDMR-Monitor/sysinfo/cpu.sh")|awk '!x[$0]++'|crontab -
+(crontab -l; echo "0 3 * * * sync ; echo 3 > rm /opt/FDMR-Monitor/data/*")|awk '!x[$0]++'|crontab -
+(crontab -l; echo "5 3 * * * sync ; echo 3 > systemctl restart fdmr_mon.service")|awk '!x[$0]++'|crontab -
 sudo systemctl enable fdmr_mon.service
 sudo systemctl restart apache2.service
 sudo systemctl enable apache2.service
 sudo systemctl start fdmr_mon.service
-cronedit.sh '0 3 * * *' 'rm /opt/FDMR-Monitor/data/*' add
-cronedit.sh '5 3 * * *' 'systemctl restart fdmr_mon.service' add
 
 chmod +x /bin/menu*
 chmod +x /bin/MENU
