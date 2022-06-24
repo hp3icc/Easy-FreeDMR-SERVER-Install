@@ -1,3 +1,4 @@
+sudo rm /bin/menu-update
 sudo cat > /bin/menu-update <<- "EOF"
 #!/bin/bash
 while : ; do
@@ -29,6 +30,7 @@ exit 0
 
 EOF
 #
+
 sudo cat > /bin/menu-up-fdm <<- "EOF"
 #!/bin/bash
 while : ; do
@@ -98,5 +100,5 @@ EOF
 #
 
 #
-chmod +x /bin/menu-*
+sudo chmod +x /bin/menu*
 menu-update
