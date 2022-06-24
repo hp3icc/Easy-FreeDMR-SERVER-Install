@@ -102,7 +102,7 @@ sudo chmod +777 /var/log
 sudo chmod +777 /var/log/*
 
 #
-sudo cat > /bin/menu-fdmr <<- "EOF"
+sudo cat > /bin/menu <<- "EOF"
 #!/bin/bash
 while : ; do
 choix=$(whiptail --title "Raspbian Proyect HP3ICC Menu FreeDMR" --menu "Suba o Baje con las flechas del teclado y seleccione el numero de opcion:" 23 56 13 \
@@ -155,7 +155,7 @@ exit 0
 
 EOF
 ###
-
+cp /bin/menu /bin/MENU
 
 sudo cat > /opt/obp.txt <<- "EOF"
 #Coloque abajo su lista de obp
@@ -687,5 +687,6 @@ cronedit.sh '0 3 * * *' 'rm /opt/FDMR-Monitor/data/*' add
 cronedit.sh '5 3 * * *' 'systemctl restart fdmr_mon.service' add
 
 chmod +x /bin/menu*
-menu-fdmr
+chmod +x /bin/MENU
+menu
 #####
