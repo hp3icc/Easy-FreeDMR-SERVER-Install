@@ -45,3 +45,20 @@ into your ssh terminal copy and paste the following link :
 To integrate your server to the freedmr network, you must contact the telegram group
 
         https://t.me/FreeDMR_Building_Server_Support
+        
+ #
+ 
+ # Sources :
+ 
+ * https://gitlab.hacknix.net/hacknix/FreeDMR
+ 
+ * http://www.freedmr.uk/index.php/freedmr-server-install/
+ 
+  * https://github.com/yuvelq/FDMR-Monitor/tree/Self_Service
+ 
+ * https://www.daniloaz.com/es/como-crear-un-usuario-en-mysql-mariadb-y-concederle-permisos-para-una-base-de-datos-desde-la-linea-de-comandos/
+ 
+ * https://www.tecmint.com/install-lamp-debian-11/
+
+ * https://styde.net/crear-una-base-de-datos-en-mysql-mariadb/
+
