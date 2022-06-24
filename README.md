@@ -36,4 +36,8 @@ into your ssh terminal copy and paste the following link :
   
  #
  
- # 
+ # server startup
+
+to integrate your server to the freedmr network, you must contact the telegram group
+
+        https://t.me/FreeDMR_Building_Server_Support
