@@ -52,29 +52,29 @@ To integrate your server to the freedmr network, you must contact the telegram g
  
  # Location files config :
  
-  * FreeDMR Server 
+  * FreeDMR Server:  
    /opt/FreeDMR/config/FreeDMR.cfg
    
-  * FreeDMR Rules
+  * FreeDMR Rules: 
    /opt/FreeDMR/config/FreeDMR.cfg
    
-  * FDMR-Monitor
+  * FDMR-Monitor: 
    /opt/FDMR-Monitor/fdmr-mon.cfg 
    
   #
   
   # Systemctl Services :
   
-  * Freedmr
+  * Freedmr: 
    freedmr.service
    
-  * FreeDMR Proxy
+  * FreeDMR Proxy: 
    proxy.service
    
-  * FreeDMR Parrot
+  * FreeDMR Parrot: 
    fdmrparrot.service
   
-  * FDMR-Monitor
+  * FDMR-Monitor: 
    fdmr_mon.service
   
  #
