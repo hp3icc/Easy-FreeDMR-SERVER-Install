@@ -6,7 +6,7 @@ this shell, install FreeDMR Server and FDMR-Monitor
 
 #
 
-Shell easy auto install , FreeDMR Server last original version gitlab haxnix, and FDMR-Monitor with Selfservice by OA4DOA
+Shell easy auto install , FreeDMR Server last original version gitlab hacknix Simon, and FDMR-Monitor with Selfservice by OA4DOA
 
 #
 
