@@ -57,7 +57,7 @@ sudo nano /opt/rules.txt ;;
 3)
 sudo nano /opt/extra-1.sh && chmod +x /opt/extra* ;;
 4)
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/fdmr-update.sh)" ;;
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/fdmr-update.sh)" ;;
 5)
 break;
 esac
