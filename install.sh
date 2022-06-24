@@ -499,9 +499,7 @@ sudo sed -i "s/\/freedmr.cfg/\/config\/FreeDMR.cfg/g"  /opt/FreeDMR/hotspot_prox
 sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/proxy_db.py
 sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/proxy_db.py
 #################
-#sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh
-#rm /opt/FDMR-Monitor/sysinfo/*.rrd 
-sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh
+
 #sed '33 a <!--' -i /var/www/html/sysinfo.php
 #sed '35 a -->' -i /var/www/html/sysinfo.php
 
@@ -669,7 +667,25 @@ EOF
 
 ##################
 sudo systemctl daemon-reload
-echo 123> /opt/FDMR-Monitor/data/123.json && sudo systemctl stop fdmr_mon.service && sudo rm /opt/FDMR-Monitor/data/*.json && sudo rm /opt/FDMR-Monitor/sysinfo/*.rrd && sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh && cronedit.sh '*/5 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/graph.sh' add && cronedit.sh '*/2 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/cpu.sh' add && sudo systemctl enable fdmr_mon.service && sudo systemctl restart apache2.service && sudo systemctl enable apache2.service && sudo systemctl start fdmr_mon.service && cronedit.sh '0 3 * * *' 'rm /opt/FDMR-Monitor/data/*' add && cronedit.sh '5 3 * * *' 'systemctl restart fdmr_mon.service' add
+systemctl start freedmr.service
+systemctl enable freedmr.service
+systemctl start proxy.service
+systemctl enable proxy.service
+systemctl start parrot.service
+systemctl enable parrot.service
+sudo rm /opt/FDMR-Monitor/data/*.json
+sudo rm /opt/FDMR-Monitor/sysinfo/*.rrd
+sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh
+
+cronedit.sh '*/5 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/graph.sh' add
+cronedit.sh '*/2 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/cpu.sh' add
+sudo systemctl enable fdmr_mon.service
+sudo systemctl restart apache2.service
+sudo systemctl enable apache2.service
+sudo systemctl start fdmr_mon.service
+cronedit.sh '0 3 * * *' 'rm /opt/FDMR-Monitor/data/*' add
+cronedit.sh '5 3 * * *' 'systemctl restart fdmr_mon.service' add
+
 chmod +x /bin/menu*
 menu-fdmr
 #####
