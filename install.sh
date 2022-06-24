@@ -105,7 +105,7 @@ sudo chmod +777 /var/log/*
 sudo cat > /bin/menu <<- "EOF"
 #!/bin/bash
 while : ; do
-choix=$(whiptail --title "Raspbian Proyect HP3ICC Menu FreeDMR" --menu "Suba o Baje con las flechas del teclado y seleccione el numero de opcion:" 23 56 13 \
+choix=$(whiptail --title "Raspbian Proyect HP3ICC EasyFreeDMR" --menu "move up or down with the keyboard arrows and select your option by pressing enter:" 23 56 13 \
 1 " Edit FreeDMR Server " \
 2 " Edit Interlink  " \
 3 " Edit FDMR-Monitor  " \
@@ -113,9 +113,8 @@ choix=$(whiptail --title "Raspbian Proyect HP3ICC Menu FreeDMR" --menu "Suba o B
 5 " Parrot on  " \
 6 " Parrot off  " \
 7 " Restart FreeDMR Server  " \
-9 " Restart FDMR-Monitor " \
-11 " Menu D-APRS " \
-12 " Menu update " 3>&1 1>&2 2>&3)
+8 " Restart FDMR-Monitor " \
+9 " Menu update " 3>&1 1>&2 2>&3)
 exitstatus=$?
 #on recupere ce choix
 #exitstatus=$?
@@ -140,11 +139,9 @@ sudo systemctl stop fdmrparrot.service && sudo systemctl start fdmrparrot.servic
 sudo systemctl stop fdmrparrot.service &&  sudo systemctl disable fdmrparrot.service ;;
 7)
 sudo systemctl stop proxy.service && sudo systemctl start proxy.service && sudo systemctl enable proxy.service && sudo systemctl stop freedmr.service && sudo systemctl start freedmr.service && sudo systemctl enable freedmr.service ;;
-9)
+8)
 echo 123> /opt/FDMR-Monitor/data/123.json && sudo systemctl stop fdmr_mon.service && sudo rm /opt/FDMR-Monitor/data/*.json && sudo rm /opt/FDMR-Monitor/sysinfo/*.rrd && sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh && cronedit.sh '*/5 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/graph.sh' add && cronedit.sh '*/2 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/cpu.sh' add && sudo systemctl enable fdmr_mon.service && sudo systemctl restart apache2.service && sudo systemctl enable apache2.service && sudo systemctl start fdmr_mon.service && cronedit.sh '0 3 * * *' 'rm /opt/FDMR-Monitor/data/*' add && cronedit.sh '5 3 * * *' 'systemctl restart fdmr_mon.service' add ;;
-11)
-menu-igate ;;
-12)
+9)
 sh -c "$(curl -fsSL https://github.com/hp3icc/Easy-FreeDMR-SERVER-Install/raw/main/update.sh)";
 esac
 done
