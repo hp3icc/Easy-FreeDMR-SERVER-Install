@@ -1,4 +1,3 @@
-sudo rm /bin/menu-update
 sudo cat > /bin/menu-update <<- "EOF"
 #!/bin/bash
 while : ; do
@@ -18,7 +17,7 @@ fi
 # case : action en fonction du choix
 case $choix in
 1)
-menu-up-fdmr ;;
+menu-up-fdm ;;
 2)
 menu-up-fdmon ;;
 3)
