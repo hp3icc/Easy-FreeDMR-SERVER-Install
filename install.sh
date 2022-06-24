@@ -663,8 +663,27 @@ Restart=on-abort
 WantedBy=multi-user.target
 
 EOF
-#
+##############################
 
+sudo systemctl stop rsyslog
+sudo systemctl disable rsyslog
+sudo systemctl disable systemd-networkd-wait-online.service
+sudo systemctl disable dphys-swapfile-back.service
+mv /lib/systemd/system/dphys-swapfile.service /lib/systemd/system/dphys-swapfile-back.service
+rm /var/log/syslog*
+rm /var/log/*.log*
+
+(crontab -l; echo "* */1 * * * sync ; echo 3 > /proc/sys/vm/drop_caches >/dev/null 2>&1")|awk '!x[$0]++'|crontab -
+#####
+sudo update-rc.d dphys-swapfile remove
+sudo chmod -x /etc/init.d/dphys-swapfile
+sudo dphys-swapfile swapoff
+sudo swapoff -a
+sudo rm /var/swap
+sudo dphys-swapfile uninstall
+cd /etc/
+sudo sed -i 's/CONF_SWAPSIZE=100/CONF_SWAPSIZE=0/' dphys-swapfile
+cd /
 ##################
 sudo systemctl daemon-reload
 systemctl start freedmr.service
@@ -688,5 +707,7 @@ cronedit.sh '5 3 * * *' 'systemctl restart fdmr_mon.service' add
 
 chmod +x /bin/menu*
 chmod +x /bin/MENU
+history -c && history -w
 menu
 #####
+
