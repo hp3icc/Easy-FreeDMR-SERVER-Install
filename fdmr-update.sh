@@ -68,6 +68,8 @@ sudo sed -i 's/ANNOUNCEMENT_LANGUAGE: en_GB/ANNOUNCEMENT_LANGUAGE: es_ES/' /opt/
 sudo sed -i 's/VOICE_IDENT: True/VOICE_IDENT: False/' /opt/FreeDMR/config/FreeDMR.cfg
 sudo sed -i "s/SERVER_ID: 0000/SERVER_ID: $variable/g"  /opt/FreeDMR/config/FreeDMR.cfg
 #sudo sed -i 's/REPORT_CLIENTS: 127.0.0.1/REPORT_CLIENTS: */' /opt/FreeDMR/config/FreeDMR.cfg
+sudo sed -i "s/TGID_URL:/#TGID_URL:/g"  /opt/FreeDMR/config/FreeDMR.cfg 
+sed '38 a TGID_URL: https://freedmr.cymru/talkgroups/talkgroup_ids_json.php' -i /opt/FreeDMR/config/FreeDMR.cfg 
 rm /opt/conf.txt
 #rm /opt/obp.txt
 cd /opt/FreeDMR/
@@ -76,7 +78,7 @@ sudo sed -i 's/54915/49061/' /opt/FreeDMR/playback.cfg
 ######
 cat /opt/rules.txt >> /opt/FreeDMR/config/rules.py
 sed '14 a VALIDATE_SERVER_IDS: True' -i /opt/FreeDMR/config/FreeDMR.cfg
-sed '104 a override_ident_tg:' -i /opt/FreeDMR/config/FreeDMR.cfg
+sed '105 a override_ident_tg:' -i /opt/FreeDMR/config/FreeDMR.cfg
 sudo rm /opt/FreeDMR/hotspot_proxy_v2.py
 #sudo rm /opt/FreeDMR/proxy_db.*
 cp /opt/FDMR-Monitor/proxy/* /opt/FreeDMR/ -r
