@@ -88,6 +88,9 @@ sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/hotspot_proxy_v2.py
 sudo sed -i "s/\/freedmr.cfg/\/config\/FreeDMR.cfg/g"  /opt/FreeDMR/hotspot_proxy_v2.py
 sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/proxy_db.py
 sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/proxy_db.py
+#
+sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/proxy.cfg
+sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/proxy.cfg
 ###
 sudo chmod +x /opt/FreeDMR/*.py
 sudo chmod +x /opt/FreeDMR/config/*.py
