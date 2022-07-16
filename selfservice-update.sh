@@ -88,6 +88,8 @@ sudo cat > /opt/FDMR-Monitor/html/buttons.php <<- "EOF"
 &nbsp;
 <a class="button" href="http://repeater.uk.freedmr.link/status/server_status.php"target="_blank">&nbsp;Status Server&nbsp;</a>
 &nbsp;
+<a class="button" href="http://www.freedmr.uk/index.php/world-wide-talk-groups/"target="_blank">&nbsp;World Wide Talk Groups&nbsp;</a>
+&nbsp;
 <a class="button" href="http://www.freedmr.uk/freedmr/option-calculator-b.php"target="_blank">&nbsp;Static TG Calculator&nbsp;</a>
 &nbsp;
 </div>
