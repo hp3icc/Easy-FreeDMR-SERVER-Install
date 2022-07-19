@@ -1,5 +1,7 @@
 cd /
 variable=$(grep "SERVER_ID:" /opt/FreeDMR/config/FreeDMR.cfg | tail -c 5)
+sudo systemctl stop freedmr.service
+sudo systemctl stop proxy.service
 rm -r /opt/FreeDMR
 cd /opt
 git clone https://gitlab.hacknix.net/hacknix/FreeDMR.git
@@ -83,6 +85,48 @@ sudo rm /opt/FreeDMR/hotspot_proxy_v2.py
 #sudo rm /opt/FreeDMR/proxy_db.*
 cp /opt/FDMR-Monitor/proxy/* /opt/FreeDMR/ -r
 #####################
+sudo cat > /lib/systemd/system/freedmr.service <<- "EOF"
+[Unit]
+Description=FreeDmr
+After=multi-user.target
+
+[Service]
+User=root
+Type=simple
+Restart=always
+RestartSec=3
+StandardOutput=null
+ExecStartPre=/bin/sh -c 'until ping -c1 noip.com; do sleep 1; done;'
+ExecStart=/usr/bin/python3 /opt/FreeDMR/bridge_master.py -c /opt/FreeDMR/config/FreeDMR.cfg -r /opt/FreeDMR/config/rules.py
+
+[Install]
+WantedBy=multi-user.target
+
+EOF
+###
+#
+sudo cat > /lib/systemd/system/proxy.service <<- "EOF"
+[Unit]
+Description= Proxy Service 
+
+After=multi-user.target
+
+
+[Service]
+User=root
+Type=simple
+Restart=always
+RestartSec=3
+StandardOutput=null
+ExecStartPre=/bin/sh -c 'until ping -c1 noip.com; do sleep 1; done;'
+#WorkingDirectory=/opt/FreeDMR
+ExecStart=/usr/bin/python3 /opt/FreeDMR/hotspot_proxy_v2.py
+
+[Install]
+WantedBy=multi-user.target
+
+EOF
+##
 sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/hotspot_proxy_v2.py
 sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/hotspot_proxy_v2.py
 sudo sed -i "s/\/freedmr.cfg/\/config\/FreeDMR.cfg/g"  /opt/FreeDMR/hotspot_proxy_v2.py
@@ -98,8 +142,8 @@ rm /opt/FreeDMR-SAMPLE.cfg
 sudo chmod +x /opt/extra-1.sh
 sudo sh /opt/extra-1.sh
 sudo systemctl daemon-reload
-sudo systemctl restart proxy.service
-sudo systemctl restart freedmr.service
+sudo systemctl start proxy.service
+sudo systemctl start freedmr.service
 sudo systemctl restart fdmrparrot.service
 # ExecStart=/usr/bin/python3 /opt/FreeDMR/bridge_master.py -c /opt/FreeDMR/config/FreeDMR.cfg -r /opt/FreeDMR/config/rules.py
 
