@@ -258,69 +258,6 @@ sudo sed -i 's/54915/49061/' /opt/FreeDMR/playback.cfg
 sed '14 a VALIDATE_SERVER_IDS: True' -i /opt/FreeDMR/config/FreeDMR.cfg
 sed '105 a override_ident_tg:' -i /opt/FreeDMR/config/FreeDMR.cfg
 
-#
-sudo cat > /lib/systemd/system/proxy.service <<- "EOF"
-[Unit]
-Description= Proxy Service 
-
-After=multi-user.target
-
-
-[Service]
-User=root
-#WorkingDirectory=/opt/FreeDMR
-ExecStart=/usr/bin/python3 /opt/FreeDMR/hotspot_proxy_v2.py
-
-[Install]
-WantedBy=multi-user.target
-
-EOF
-#########
-sudo cat > /lib/systemd/system/freedmr.service <<- "EOF"
-[Unit]
-Description=FreeDmr
-
-After=multi-user.target
-
-[Service]
-User=root
-#ExecStartPre=/bin/sleep 30
-ExecStart=/usr/bin/python3 /opt/FreeDMR/bridge_master.py -c /opt/FreeDMR/config/FreeDMR.cfg -r /opt/FreeDMR/config/rules.py
-
-
-
-[Install]
-WantedBy=multi-user.target
-
-EOF
-###
-sudo cat > /lib/systemd/system/fdmrparrot.service <<- "EOF"
-[Unit]
-
-Description=Freedmr Parrot
-
-After=network-online.target syslog.target
-
-Wants=network-online.target
-
-[Service]
-
-StandardOutput=null
-
-WorkingDirectory=/opt/FreeDMR
-
-RestartSec=3
-
-ExecStart=/usr/bin/python3 /opt/FreeDMR/playback.py -c /opt/FreeDMR/playback.cfg
-#/usr/bin/python3 /opt/HBlink3/playback.py -c /opt/HBlink3/playback.cfg
-
-Restart=on-abort
-
-[Install]
-
-WantedBy=multi-user.target
-
-EOF
 #######lamp
 sudo apt install mariadb-server php libapache2-mod-php php-zip php-mbstring php-cli php-common php-curl php-xml php-mysql -y
 
