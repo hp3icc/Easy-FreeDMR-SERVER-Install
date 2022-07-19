@@ -163,6 +163,7 @@ cp -r /opt/FDMR-Monitor/sysinfo/ /var/www/html/sysinfo/
 
 #sudo rm mon.db
 #sudo python3 mon_db.py
-sudo systemctl restart proxy.service
-sudo systemctl restart fdmr_mon.service
+sudo systemctl daemon-reload	
+sudo systemctl start proxy.service
+sudo systemctl start fdmr_mon.service
 sudo systemctl enable fdmr_mon.service
