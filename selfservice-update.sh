@@ -1,5 +1,6 @@
 #!/bin/sh
 sudo systemctl stop fdmr_mon.service
+sudo systemctl stop proxy.service
 sudo systemctl stop http.server-fmr.service
 sudo systemctl disable http.server-fmr.service
 sudo rm -r /opt/FDMR-Monitor/
