@@ -72,6 +72,7 @@ sudo sed -i "s/SERVER_ID: 0000/SERVER_ID: $variable/g"  /opt/FreeDMR/config/Free
 #sudo sed -i 's/REPORT_CLIENTS: 127.0.0.1/REPORT_CLIENTS: */' /opt/FreeDMR/config/FreeDMR.cfg
 sudo sed -i "s/TGID_URL:/#TGID_URL:/g"  /opt/FreeDMR/config/FreeDMR.cfg 
 sed '37 a TGID_URL: https://freedmr.cymru/talkgroups/talkgroup_ids_json.php' -i /opt/FreeDMR/config/FreeDMR.cfg 
+sed '43 a TOPO_FILE:' -i /opt/FreeDMR/config/FreeDMR.cfg 
 rm /opt/conf.txt
 #rm /opt/obp.txt
 cd /opt/FreeDMR/
@@ -120,7 +121,8 @@ RestartSec=3
 StandardOutput=null
 ExecStartPre=/bin/sh -c 'until ping -c1 noip.com; do sleep 1; done;'
 #WorkingDirectory=/opt/FreeDMR
-ExecStart=/usr/bin/python3 /opt/FreeDMR/hotspot_proxy_v2.py
+#ExecStart=/usr/bin/python3 /opt/FreeDMR/hotspot_proxy_v2.py
+ExecStart=/usr/bin/python3 /opt/FreeDMR/hotspot_proxy_v2.py -c /opt/FreeDMR/proxy.cfg
 
 [Install]
 WantedBy=multi-user.target
