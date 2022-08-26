@@ -441,6 +441,7 @@ sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/proxy_db.py
 #
 sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/proxy.cfg
 sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/proxy.cfg
+sudo sed -i "56,63d" /opt/FreeDMR/config/FreeDMR.cfg
 #################
 
 #sed '33 a <!--' -i /var/www/html/sysinfo.php
