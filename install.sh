@@ -255,7 +255,7 @@ rm /opt/FreeDMR/conf.txt
 cd /opt/FreeDMR/
 mv loro.cfg /opt/FreeDMR/playback.cfg
 sudo sed -i 's/54915/49061/' /opt/FreeDMR/playback.cfg
-sudo sed -i "121,129d" /opt/FreeDMR/playback.cfg
+#sudo sed -i "121,129d" /opt/FreeDMR/playback.cfg
 #
 sed '14 a VALIDATE_SERVER_IDS: True' -i /opt/FreeDMR/config/FreeDMR.cfg
 sed '105 a override_ident_tg:' -i /opt/FreeDMR/config/FreeDMR.cfg
