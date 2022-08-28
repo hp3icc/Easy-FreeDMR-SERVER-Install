@@ -79,7 +79,7 @@ rm /opt/conf.txt
 cd /opt/FreeDMR/
 mv loro.cfg /opt/FreeDMR/playback.cfg
 sudo sed -i 's/54915/49061/' /opt/FreeDMR/playback.cfg
-sudo sed -i "121,129d" /opt/FreeDMR/playback.cfg
+#sudo sed -i "121,129d" /opt/FreeDMR/playback.cfg
 ######
 cat /opt/rules.txt >> /opt/FreeDMR/config/rules.py
 sed '14 a VALIDATE_SERVER_IDS: True' -i /opt/FreeDMR/config/FreeDMR.cfg
