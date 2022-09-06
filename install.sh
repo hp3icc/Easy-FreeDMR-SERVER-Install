@@ -318,7 +318,7 @@ sudo git clone https://github.com/yuvelq/FDMR-Monitor.git
 cd FDMR-Monitor
 sudo git checkout Self_Service
 sudo sed -i 's/RELOAD_TIME = 15/RELOAD_TIME = 1/' /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
-sudo sed -i 's/FREQUENCY = 10/FREQUENCY = 60/' /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
+sudo sed -i 's/FREQUENCY = 10/FREQUENCY = 120/' /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
 sudo chmod 644 /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
 sed '33 a <!--' -i /opt/FDMR-Monitor/html/sysinfo.php
 sed '35 a -->' -i /opt/FDMR-Monitor/html/sysinfo.php
