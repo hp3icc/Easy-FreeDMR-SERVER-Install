@@ -13,8 +13,7 @@ sudo git clone https://github.com/yuvelq/FDMR-Monitor.git
 cd FDMR-Monitor
 sudo git checkout Self_Service
 sudo chmod +x install.sh
-#sudo ./install.sh
-#sudo cp fdmr-mon_SAMPLE.cfg fdmr-mon.cfg
+
 sudo sed -i 's/RELOAD_TIME = 15/RELOAD_TIME = 1/' /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
 #sudo cp utils/logrotate/fdmr_mon /etc/logrotate.d/
 rm /etc/logrotate.d/fdmr_mon
