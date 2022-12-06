@@ -152,7 +152,7 @@ exit 0
 
 EOF
 ###
-cp /bin/menu /bin/MENU
+ln -s /bin/menu /bin/MENU
 
 sudo cat > /opt/obp.txt <<- "EOF"
 #Coloque abajo su lista de obp
