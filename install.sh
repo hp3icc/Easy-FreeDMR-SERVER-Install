@@ -138,9 +138,9 @@ sudo systemctl stop fdmrparrot.service && sudo systemctl start fdmrparrot.servic
 6)
 sudo systemctl stop fdmrparrot.service &&  sudo systemctl disable fdmrparrot.service ;;
 7)
-sudo systemctl stop proxy.service && sudo systemctl start proxy.service && sudo systemctl enable proxy.service && sudo systemctl stop freedmr.service && sudo systemctl start freedmr.service && sudo systemctl enable freedmr.service ;;
+sudo systemctl stop proxy.service && sudo systemctl start proxy.service && sudo systemctl enable proxy.service && sudo systemctl stop freedmr.service && sudo systemctl start freedmr.service && sudo systemctl enable freedmr.service && cronedit.sh '* */6 * * *' 'data-id' add;;
 8)
-echo 123> /opt/FDMR-Monitor/data/123.json && sudo systemctl stop fdmr_mon.service && sudo rm /opt/FDMR-Monitor/sysinfo/*.rrd && sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh && cronedit.sh '*/5 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/graph.sh' add && cronedit.sh '*/2 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/cpu.sh' add && sudo systemctl enable fdmr_mon.service && sudo systemctl restart apache2.service && sudo systemctl enable apache2.service && sudo systemctl start fdmr_mon.service ;;
+sudo systemctl stop fdmr_mon.service && sudo rm /opt/FDMR-Monitor/sysinfo/*.rrd && sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh && cronedit.sh '*/5 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/graph.sh' add && cronedit.sh '*/2 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/cpu.sh' add && sudo systemctl enable fdmr_mon.service && sudo systemctl restart apache2.service && sudo systemctl enable apache2.service && sudo systemctl start fdmr_mon.service;;
 9)
 sh -c "$(curl -fsSL https://github.com/hp3icc/Easy-FreeDMR-SERVER-Install/raw/main/update.sh)";
 esac
@@ -649,8 +649,8 @@ sudo rm /opt/FDMR-Monitor/sysinfo/*.rrd
 sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh
 (crontab -l; echo "*/5 * * * * sh /opt/FDMR-Monitor/sysinfo/graph.sh")|awk '!x[$0]++'|crontab -
 (crontab -l; echo "*/2 * * * * sh /opt/FDMR-Monitor/sysinfo/cpu.sh")|awk '!x[$0]++'|crontab -
+(crontab -l; echo "* */6 * * * data-id")|awk '!x[$0]++'|crontab -
 
-#(crontab -l; echo "5 3 * * * systemctl restart fdmr_mon.service")|awk '!x[$0]++'|crontab -
 sudo systemctl enable fdmr_mon.service
 sudo systemctl restart apache2.service
 sudo systemctl enable apache2.service
