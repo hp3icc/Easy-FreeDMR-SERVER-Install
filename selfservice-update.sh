@@ -160,6 +160,7 @@ sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh
 #sed '35 a -->' -i /var/www/html/sysinfo.php
 
 cp -r /opt/FDMR-Monitor/sysinfo/ /var/www/html/sysinfo/
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/menu.sh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
 data-id
 #sudo rm mon.db
