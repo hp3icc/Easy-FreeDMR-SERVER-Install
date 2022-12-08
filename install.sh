@@ -625,7 +625,8 @@ rm /var/log/syslog*
 rm /var/log/*.log*
 
 (crontab -l; echo "* */1 * * * sync ; echo 3 > /proc/sys/vm/drop_caches >/dev/null 2>&1")|awk '!x[$0]++'|crontab -
-
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
+data-id
 #####
 sudo update-rc.d dphys-swapfile remove
 sudo chmod -x /etc/init.d/dphys-swapfile
