@@ -82,8 +82,8 @@ sudo sed -i 's/54915/49061/' /opt/FreeDMR/playback.cfg
 #sudo sed -i "121,129d" /opt/FreeDMR/playback.cfg
 ######
 cat /opt/rules.txt >> /opt/FreeDMR/config/rules.py
-sed '14 a VALIDATE_SERVER_IDS: True' -i /opt/FreeDMR/config/FreeDMR.cfg
-sed '105 a override_ident_tg:' -i /opt/FreeDMR/config/FreeDMR.cfg
+#sed '14 a VALIDATE_SERVER_IDS: True' -i /opt/FreeDMR/config/FreeDMR.cfg
+#sed '105 a override_ident_tg:' -i /opt/FreeDMR/config/FreeDMR.cfg
 sudo rm /opt/FreeDMR/hotspot_proxy_v2.py
 #sudo rm /opt/FreeDMR/proxy_db.*
 cp /opt/FDMR-Monitor/proxy/* /opt/FreeDMR/ -r
@@ -139,7 +139,7 @@ sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/proxy_db.py
 #
 sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/proxy.cfg
 sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/proxy.cfg
-sudo sed -i "56,63d" /opt/FreeDMR/config/FreeDMR.cfg
+#sudo sed -i "56,63d" /opt/FreeDMR/config/FreeDMR.cfg
 ###
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/menu.sh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
