@@ -207,8 +207,8 @@ mv loro.cfg /opt/FreeDMR/playback.cfg
 sudo sed -i 's/54915/49061/' /opt/FreeDMR/playback.cfg
 #sudo sed -i "121,129d" /opt/FreeDMR/playback.cfg
 #
-sed '14 a VALIDATE_SERVER_IDS: True' -i /opt/FreeDMR/config/FreeDMR.cfg
-sed '105 a override_ident_tg:' -i /opt/FreeDMR/config/FreeDMR.cfg
+#sed '14 a VALIDATE_SERVER_IDS: True' -i /opt/FreeDMR/config/FreeDMR.cfg
+#sed '105 a override_ident_tg:' -i /opt/FreeDMR/config/FreeDMR.cfg
 
 #######lamp
 sudo apt install mariadb-server php libapache2-mod-php php-zip php-mbstring php-cli php-common php-curl php-xml php-mysql -y
@@ -391,7 +391,7 @@ sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/proxy_db.py
 #
 sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/proxy.cfg
 sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/proxy.cfg
-sudo sed -i "56,63d" /opt/FreeDMR/config/FreeDMR.cfg
+#sudo sed -i "56,63d" /opt/FreeDMR/config/FreeDMR.cfg
 #################
 
 #sed '33 a <!--' -i /var/www/html/sysinfo.php
