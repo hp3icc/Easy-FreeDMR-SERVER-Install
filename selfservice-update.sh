@@ -144,6 +144,7 @@ chmod +x /opt/FDMR-Monitor/install.sh
 sh /opt/FDMR-Monitor/install.sh
 sudo sh /opt/extra-2.sh
 #####################
+sudo sed -i "s/All rights reserved.<br>.*/All rights reserved.<br><a title=\"Raspbian Proyect by HP3ICC © <?php \$cdate=date(\"Y\"); if (\$cdate > \"2018\") {\$cdate=\"2018-\".date(\"Y\");} echo \$cdate; ?>\" target=\"_blank\" href=https:\/\/github.com\/hp3icc\/Easy-FreeDMR-SERVER-Install\/>Proyect: Easy-FreeDMR-SERVER-Install<\/a><br>/g" /var/www/html/*.php
 sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/hotspot_proxy_v2.py
 sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/hotspot_proxy_v2.py
 sudo sed -i "s/\/freedmr.cfg/\/config\/FreeDMR.cfg/g"  /opt/FreeDMR/hotspot_proxy_v2.py
