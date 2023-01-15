@@ -1,7 +1,7 @@
 #!/bin/sh
 echo Actualizando sistema 
-apt-get update -y
-apt-get upgrade -y
+apt-get update 
+# apt-get upgrade -y
 #########
 apt-get install sudo -y
 sudo apt-get purge needrestart -y
