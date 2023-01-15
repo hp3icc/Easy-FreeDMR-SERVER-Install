@@ -5,7 +5,8 @@ sudo systemctl stop proxy.service
 sudo systemctl stop fdmrparrot.service
 rm -r /opt/FreeDMR
 cd /opt
-git clone https://gitlab.hacknix.net/hacknix/FreeDMR.git
+#git clone https://gitlab.hacknix.net/hacknix/FreeDMR.git
+git clone https://github.com/hp3icc/FreeDMR.git
 cd FreeDMR
 mkdir config
 mkdir /var/log/FreeDMR
