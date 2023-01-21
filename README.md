@@ -8,7 +8,7 @@ this shell, install FreeDMR Server and FDMR-Monitor
 
 #
 
-Shell easy auto install , FreeDMR Server last original version gitlab hacknix Simon, and FDMR-Monitor with Selfservice by OA4DOA
+Shell easy auto install FreeDMR Server version Self-Service without Docker, latest original gitlab hacknix version by G7RZU Simon, with Dashboard by OA4DOA, template mods by WP3JM James and menu by HP3ICC.
 
 # Important note , Unofficial script to install Freedmr Server with Dashboard self-service, if you require support from the official version of the developer , refer to the original developer script :
 
