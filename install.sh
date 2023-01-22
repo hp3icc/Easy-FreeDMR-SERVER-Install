@@ -264,7 +264,7 @@ chmod +x /opt/extra-*
 #
 #fdmr-monitor
 cd /opt
-sudo git clone https://github.com/yuvelq/FDMR-Monitor.git
+sudo git clone https://github.com/hp3icc/FDMR-Monitor.git
 cd FDMR-Monitor
 sudo git checkout Self_Service
 sudo sed -i 's/RELOAD_TIME = 15/RELOAD_TIME = 1/' /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
