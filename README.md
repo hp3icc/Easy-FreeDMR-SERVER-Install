@@ -70,7 +70,7 @@ Password example " abc123 " :
 
 Options=PASS=abc123
  
- ![alt text](https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/pistar.png)
+<img src="https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/pistar.jpg" width="250" height="280"> <img src="https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/droidstar.jpg" width="200" height="280"> <img src="https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-Docker/main/mmdvm.jpg" width="250" height="280">
  
  The password must contain at least 6 characters between letters and numbers, you cannot use your callsign as a password.
  
