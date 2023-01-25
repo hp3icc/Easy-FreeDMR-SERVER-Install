@@ -1,12 +1,11 @@
 #!/bin/sh
 sudo systemctl stop fdmr_mon.service
 sudo systemctl stop proxy.service
-sudo systemctl stop http.server-fmr.service
-sudo systemctl disable http.server-fmr.service
+sudo systemctl stop apache2
+sudo systemctl disable apache2
+sudo systemctl stop http.server-fdmr.service
 sudo rm -r /opt/FDMR-Monitor/
-#
-systemctl restart apache2
-sudo systemctl enable apache2
+sudo rm -r /var/www/fdmr/
 #
 cd /opt
 sudo git clone https://github.com/hp3icc/FDMR-Monitor.git
@@ -24,10 +23,11 @@ sudo chmod 644 /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
 sed '33 a <!--' -i /opt/FDMR-Monitor/html/sysinfo.php
 sed '35 a -->' -i /opt/FDMR-Monitor/html/sysinfo.php
 ####
+sudo sed -i "s/www\/html/www\/fdmr/g" /opt/FDMR-Monitor/html/*.*
+sudo sed -i "s/www\/html/www\/fdmr/g" /opt/FDMR-Monitor/sysinfo/*.*
+####
 sudo sed -i 's/localhost_2-day.png/localhost_1-day.png/' /opt/FDMR-Monitor/html/sysinfo.php
 cd /var/www/html/sysinfo/
-#sudo sed -i 's/var\/www\/html/opt\/FDMR-Monitor\/html/' cpu.sh
-#sudo sed -i 's/var\/www\/html/opt\/FDMR-Monitor\/html/' graph.sh
 sudo sed -i "s/HBMonv2/FDMR-Monitor/g"  /opt/FDMR-Monitor/sysinfo/*.sh
 
 
@@ -122,11 +122,6 @@ sudo cat > /opt/FDMR-Monitor/html/buttons.php <<- "EOF"
 EOF
 
 #
-
-#sudo sed -i "s/opt\/FreeDMR\/freedmr.cfg/opt\/FreeDMR\/config\/FreeDMR.cfg/g"  /opt/FDMR-Monitor/install.sh
-
-sudo systemctl daemon-reload
-
 sudo chmod +x /opt/extra-2.sh
 sudo sh /opt/extra-2.sh
 sudo sed -i "s/root/emqte1/g"  /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
@@ -144,7 +139,7 @@ chmod +x /opt/FDMR-Monitor/install.sh
 sh /opt/FDMR-Monitor/install.sh
 sudo sh /opt/extra-2.sh
 #####################
-sudo sed -i "s/All rights reserved.<br>.*/All rights reserved.<br><a title=\"Raspbian Proyect by HP3ICC © <?php \$cdate=date(\"Y\"); if (\$cdate > \"2018\") {\$cdate=\"2018-\".date(\"Y\");} echo \$cdate; ?>\" target=\"_blank\" href=https:\/\/github.com\/hp3icc\/Easy-FreeDMR-SERVER-Install\/>Proyect: Easy-FreeDMR-SERVER-Install<\/a><br>/g" /var/www/html/*.php
+sudo sed -i "s/All rights reserved.<br>.*/All rights reserved.<br><a title=\"Raspbian Proyect by HP3ICC © <?php \$cdate=date(\"Y\"); if (\$cdate > \"2018\") {\$cdate=\"2018-\".date(\"Y\");} echo \$cdate; ?>\" target=\"_blank\" href=https:\/\/github.com\/hp3icc\/Easy-FreeDMR-SERVER-Install\/>Proyect: Easy-FreeDMR-SERVER-Install<\/a><br>/g" /var/www/fdmr/*.php
 sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/hotspot_proxy_v2.py
 sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/hotspot_proxy_v2.py
 sudo sed -i "s/\/freedmr.cfg/\/config\/FreeDMR.cfg/g"  /opt/FreeDMR/hotspot_proxy_v2.py
@@ -160,7 +155,7 @@ sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh
 #sed '33 a <!--' -i /var/www/html/sysinfo.php
 #sed '35 a -->' -i /var/www/html/sysinfo.php
 
-cp -r /opt/FDMR-Monitor/sysinfo/ /var/www/html/sysinfo/
+cp -r /opt/FDMR-Monitor/sysinfo/ /var/fdmr/html/sysinfo/
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/menu.sh)"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
 data-id
@@ -170,3 +165,5 @@ sudo systemctl daemon-reload
 sudo systemctl start proxy.service
 sudo systemctl start fdmr_mon.service
 sudo systemctl enable fdmr_mon.service
+sudo systemctl start http.server-fdmr.service
+sudo systemctl enable http.server-fdmr.service
