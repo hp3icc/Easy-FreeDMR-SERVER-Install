@@ -120,12 +120,16 @@ To integrate your server to the freedmr network, you must contact the telegram g
   * FDMR-Monitor: 
    
    fdmr_mon.service
+   
+  * Web Server
+  
+   http.server-fdmr.service
   
  #
   
  # Dashboard Files
  
- /var/www/html/
+ /var/www/fdmr/
 
 #
 
