@@ -383,7 +383,7 @@ sudo chmod +x /opt/FDMR-Monitor/*.py
 sh /opt/FDMR-Monitor/install.sh
 sudo sh /opt/extra-2.sh
 #####################
-sudo sed -i "s/All rights reserved.<br>.*/All rights reserved.<br><a title=\"Raspbian Proyect by HP3ICC © <?php \$cdate=date(\"Y\"); if (\$cdate > \"2018\") {\$cdate=\"2018-\".date(\"Y\");} echo \$cdate; ?>\" target=\"_blank\" href=https:\/\/github.com\/hp3icc\/Easy-FreeDMR-SERVER-Install\/>Proyect: Easy-FreeDMR-SERVER-Install<\/a><br>/g" /var/www/html/*.php
+sudo sed -i "s/All rights reserved.<br>.*/All rights reserved.<br><a title=\"Raspbian Proyect by HP3ICC © <?php \$cdate=date(\"Y\"); if (\$cdate > \"2018\") {\$cdate=\"2018-\".date(\"Y\");} echo \$cdate; ?>\" target=\"_blank\" href=https:\/\/github.com\/hp3icc\/Easy-FreeDMR-SERVER-Install\/>Proyect: Easy-FreeDMR-SERVER-Install<\/a><br>/g" /var/www/fdmr/*.php
 sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/hotspot_proxy_v2.py
 sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/hotspot_proxy_v2.py
 sudo sed -i "s/\/freedmr.cfg/\/config\/FreeDMR.cfg/g"  /opt/FreeDMR/hotspot_proxy_v2.py
@@ -398,7 +398,7 @@ sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/proxy.cfg
 #sed '33 a <!--' -i /var/www/html/sysinfo.php
 #sed '35 a -->' -i /var/www/html/sysinfo.php
 
-cp -r /opt/FDMR-Monitor/sysinfo/ /var/www/html/sysinfo/
+cp -r /opt/FDMR-Monitor/sysinfo/ /var/www/fdmr/sysinfo/
 
 #########
 sudo cat > /opt/FreeDMR/config/rules.py <<- "EOF"
