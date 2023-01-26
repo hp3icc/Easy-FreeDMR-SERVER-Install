@@ -31,14 +31,6 @@ else
  echo "file not found"
 
 fi
-if [ -f "/var/www/html/tgcount.php" ];
-then
-   sudo systemctl disable apache2
- #echo "found file"
-else
- echo "file not found"
-
-fi
 sudo systemctl stop fdmr_mon.service
 sudo systemctl stop proxy.service
 sudo systemctl stop http.server-fdmr.service
