@@ -58,7 +58,31 @@ sudo pip3 install ansi2html
 sudo apt-get install python-pip -y
 sudo apt-get install python-dev -y
 sudo apt-get install rrdtool -y
+#
+if [ -d "/opt/FreeDMR" ];
+then
+   sudo rm /opt/FreeDMR/ -r
+ #echo "found file"
+else
+ echo "file not found"
 
+fi
+if [ -d "/opt/FDMR-Monitor" ];
+then
+   sudo rm /opt/FDMR-Monitor/ -r
+ #echo "found file"
+else
+ echo "file not found"
+
+fi
+if [ -d "/var/www/fdmr" ];
+then
+   sudo rm /var/www/fdmr/ -r
+ #echo "found file"
+else
+ echo "file not found"
+
+fi
 ##################
 sudo cat > /opt/emq-ver <<- "EOF"
 EMQ-VER:  20
