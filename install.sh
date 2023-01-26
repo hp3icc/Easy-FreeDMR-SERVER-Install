@@ -237,7 +237,7 @@ sudo sed -i 's/54915/49061/' /opt/FreeDMR/playback.cfg
 #######lamp
 sudo apt install mariadb-server php libapache2-mod-php php-zip php-mbstring php-cli php-common php-curl php-xml php-mysql -y
 
-sudo apt install apache2 -y
+#sudo apt install apache2 -y
 #systemctl restar apache2
 #systemctl enable apache2
 systemctl restart mariadb
