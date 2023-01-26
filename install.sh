@@ -214,8 +214,8 @@ sudo sed -i 's/54915/49061/' /opt/FreeDMR/playback.cfg
 sudo apt install mariadb-server php libapache2-mod-php php-zip php-mbstring php-cli php-common php-curl php-xml php-mysql -y
 
 sudo apt install apache2 -y
-systemctl restar apache2
-systemctl enable apache2
+#systemctl restar apache2
+#systemctl enable apache2
 systemctl restart mariadb
 systemctl enable mariadb
 #sudo mysql_secure_installation  --host=localhost --port=3306
@@ -603,10 +603,11 @@ sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh
 (crontab -l; echo "* */6 * * * data-id")|awk '!x[$0]++'|crontab -
 
 sudo systemctl enable fdmr_mon.service
-sudo systemctl restart apache2.service
-sudo systemctl enable apache2.service
+#sudo systemctl restart apache2.service
+#sudo systemctl enable apache2.service
 sudo systemctl start fdmr_mon.service
-
+sudo systemctl restart http.server-fdmr.service
+sudo systemctl enable http.server-fdmr.service
 chmod +x /bin/menu*
 chmod +x /bin/MENU
 history -c && history -w
