@@ -648,8 +648,22 @@ systemctl start proxy.service
 systemctl enable proxy.service
 systemctl start fdmrparrot.service
 systemctl enable fdmrparrot.service
-sudo rm /opt/FDMR-Monitor/sysinfo/*.rrd
+#################
+if [ -f "/opt/FDMR-Monitor/sysinfo/tempC.rrd" ]
+then
+  rm /opt/FDMR-Monitor/sysinfo/*.rrd
+elif
+  [ -f "/opt/FDMR-Monitor/sysinfo/load.rrd" ]
+then
+  rm /opt/FDMR-Monitor/sysinfo/*.rrd
+elif
+  [ -f "/opt/FDMR-Monitor/sysinfo/hdd.rrd" ]
+then
+  rm /opt/FDMR-Monitor/sysinfo/*.rrd
+fi
+
 sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh
+######################
 (crontab -l; echo "*/5 * * * * sh /opt/FDMR-Monitor/sysinfo/graph.sh")|awk '!x[$0]++'|crontab -
 (crontab -l; echo "*/2 * * * * sh /opt/FDMR-Monitor/sysinfo/cpu.sh")|awk '!x[$0]++'|crontab -
 (crontab -l; echo "* */6 * * * data-id")|awk '!x[$0]++'|crontab -
