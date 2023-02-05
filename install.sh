@@ -75,6 +75,14 @@ else
  echo "file not found"
 
 fi
+if [ -d "/var/www" ];
+then
+   echo "found file"
+else
+ mkdir /var/www
+ #echo "file not found"
+
+fi
 if [ -d "/var/www/fdmr" ];
 then
    sudo rm /var/www/fdmr/ -r
@@ -118,8 +126,7 @@ pip3 install -r requirements.txt
 sudo rm requirements.txt
 sudo rm get-pip.py
 #
-mkdir /var/www
-mkdir /var/www/html
+mkdir /var/www/fdmr
 
 mkdir /var/log/FreeDMR
 sudo chmod +777 /var/log
@@ -351,7 +358,6 @@ sed '33 a <!--' -i /opt/FDMR-Monitor/html/sysinfo.php
 sed '35 a -->' -i /opt/FDMR-Monitor/html/sysinfo.php
 ####
 sudo sed -i 's/localhost_2-day.png/localhost_1-day.png/' /opt/FDMR-Monitor/html/sysinfo.php
-cd /var/www/html/sysinfo/
 #sudo sed -i 's/var\/www\/html/opt\/FDMR-Monitor\/html/' cpu.sh
 #sudo sed -i 's/var\/www\/html/opt\/FDMR-Monitor\/html/' graph.sh
 sudo sed -i "s/HBMonv2/FDMR-Monitor/g"  /opt/FDMR-Monitor/sysinfo/*.sh
