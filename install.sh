@@ -128,12 +128,62 @@ sudo chmod +777 /var/log/*
 #
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/menu.sh)"
 
-sudo cat > /opt/obp.txt <<- "EOF"
-#Coloque abajo su lista de obp
-
+########################
+if [ -f "/opt/obp.txt" ]
+then
+   echo "found file"
+else
+  sudo cat > /opt/obp.txt <<- "EOF"
+ 
+#Coloque abajo su lista de obp y peer
 
 EOF
-####
+fi
+######################
+if [ -f "/opt/rules.txt" ]
+then
+   echo "found file"
+else
+ sudo cat > /opt/rules.txt <<- "EOF"
+BRIDGES = {
+ 
+ '9990': [ 
+        {'SYSTEM': 'EchoTest',              'TS': 2, 'TGID': 9990, 'ACTIVE':True, 'TIMEOUT': 0, 'TO_TYPE': 'NONE', 'ON': [9990], 'OFF': [], 'RESET': []}, 
+        ],
+  
+  
+  
+}
+if __name__ == '__main__':
+    from pprint import pprint
+    pprint(BRIDGES)
+  
+ 
+EOF
+fi
+############
+if [ -f "/opt/extra-1.sh" ]
+then
+  echo "found file"
+else
+  sudo cat > /opt/extra-1.sh <<- "EOF"
+######################################################################
+# Coloque en este archivo, cualquier instruccion shell adicional que # 
+# quierre se realice al finalizar la actualizacion.                  #
+######################################################################
+ 
+  
+EOF
+# 
+cp /opt/extra-1.sh /opt/extra-2.sh
+cp /opt/extra-1.sh /opt/extra-3.sh
+cp /opt/extra-1.sh /opt/extra-4.sh
+cp /opt/extra-1.sh /opt/extra-5.sh
+cp /opt/extra-1.sh /opt/extra-6.sh
+fi
+sudo chmod +x /opt/extra-*
+
+###################
 cat > /usr/local/bin/cronedit.sh <<- "EOF"
 cronjob_editor () {
 # usage: cronjob_editor '<interval>' '<command>' <add|remove>
@@ -288,32 +338,7 @@ commands="CREATE DATABASE \`${newDb}\`;CREATE USER '${newUser}'@'${host}' IDENTI
 
 #cho "${commands}" | /usr/bin/mysql -u root -p
 echo "${commands}" | /usr/bin/mysql -u root
-#
-sudo cat > /opt/obp.txt <<- "EOF"
- 
-#Coloque abajo su lista de obp
- 
- 
-EOF
-##########################################
-sudo cat > /opt/extra-1.sh <<- "EOF"
-######################################################################
-# Coloque en este archivo, cualquier instruccion shell adicional que # 
-# quierre se realice al finalizar la actualizacion.                  #
-######################################################################
- 
-  
-
-
-EOF
-# 
-cp /opt/extra-1.sh /opt/extra-2.sh
-cp /opt/extra-1.sh /opt/extra-3.sh
-cp /opt/extra-1.sh /opt/extra-4.sh
-cp /opt/extra-1.sh /opt/extra-5.sh
-cp /opt/extra-1.sh /opt/extra-6.sh
-chmod +x /opt/extra-*
-#
+###########################################
 #fdmr-monitor
 cd /opt
 sudo git clone https://github.com/yuvelq/FDMR-Monitor.git
@@ -505,29 +530,7 @@ if __name__ == '__main__':
     pprint(BRIDGES)
 
 EOF
-#######
-sudo cat > /opt/rules.txt <<- "EOF"
- 
-BRIDGES = {
- 
- '9990': [ 
-{'SYSTEM': 'EchoTest',          'TS': 2, 'TGID': 9990, 'ACTIVE':True, 'TIMEOUT': 0, 'TO_TYPE': 'NONE', 'ON': [], 'OFF': [], 'RESET': []}, 
- 
-],
- 
- 
- 
-}
-if __name__ == '__main__':
-    from pprint import pprint
-    pprint(BRIDGES)
- 
-  
- 
-EOF
-###
-
-###################
+##########################
 sudo cat > /opt/rules.txt <<- "EOF"
  
 BRIDGES = {
