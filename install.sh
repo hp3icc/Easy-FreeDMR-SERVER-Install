@@ -531,26 +531,7 @@ if __name__ == '__main__':
 
 EOF
 ##########################
-sudo cat > /opt/rules.txt <<- "EOF"
- 
-BRIDGES = {
- 
- '9990': [ 
-{'SYSTEM': 'EchoTest',          'TS': 2, 'TGID': 9990, 'ACTIVE':True, 'TIMEOUT': 0, 'TO_TYPE': 'NONE', 'ON': [], 'OFF': [], 'RESET': []}, 
- 
-],
- 
- 
- 
-}
-if __name__ == '__main__':
-    from pprint import pprint
-    pprint(BRIDGES)
- 
-  
- 
-EOF
-###################
+
 sudo cat > /lib/systemd/system/proxy.service <<- "EOF"
 [Unit]
 Description= Proxy Service 
