@@ -59,6 +59,24 @@ sudo apt-get install python-pip -y
 sudo apt-get install python-dev -y
 sudo apt-get install rrdtool -y
 #
+cat > /usr/local/bin/cronedit.sh <<- "EOF"
+cronjob_editor () {
+# usage: cronjob_editor '<interval>' '<command>' <add|remove>
+if [[ -z "$1" ]] ;then printf " no interval specified\n" ;fi
+if [[ -z "$2" ]] ;then printf " no command specified\n" ;fi
+if [[ -z "$3" ]] ;then printf " no action specified\n" ;fi
+if [[ "$3" == add ]] ;then
+    # add cronjob, no duplication:
+    ( sudo crontab -l | grep -v -F -w "$2" ; echo "$1 $2" ) | sudo crontab -
+elif [[ "$3" == remove ]] ;then
+    # remove cronjob:
+    ( sudo crontab -l | grep -v -F -w "$2" ) | sudo crontab -
+fi
+}
+cronjob_editor "$1" "$2" "$3"
+EOF
+sudo chmod +x /usr/local/bin/cronedit.sh
+#
 if [ -d "/opt/FreeDMR" ];
 then
    sudo rm /opt/FreeDMR/ -r
@@ -310,7 +328,7 @@ sudo sed -i 's/VOICE_IDENT: True/VOICE_IDENT: False/' /opt/FreeDMR/config/FreeDM
 sudo sed -i "s/TGID_URL:/#TGID_URL:/g"  /opt/FreeDMR/config/FreeDMR.cfg 
 sed '37 a TGID_URL: https://freedmr.cymru/talkgroups/talkgroup_ids_json.php' -i /opt/FreeDMR/config/FreeDMR.cfg 
 #sed '43 a TOPO_FILE: topography.json' -i /opt/FreeDMR/config/FreeDMR.cfg
-rm /opt/FreeDMR-SAMPLE.cfg
+#rm /opt/FreeDMR-SAMPLE.cfg
 rm /opt/conf.txt
 cd /opt/FreeDMR/
 mv loro.cfg /opt/FreeDMR/playback.cfg
