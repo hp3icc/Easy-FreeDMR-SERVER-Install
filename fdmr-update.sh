@@ -13,6 +13,25 @@ mkdir config
 mkdir /var/log/FreeDMR
 chmod +x /opt/FreeDMR/install.sh
 ./install.sh
+#
+cat > /usr/local/bin/cronedit.sh <<- "EOF"
+cronjob_editor () {
+# usage: cronjob_editor '<interval>' '<command>' <add|remove>
+if [[ -z "$1" ]] ;then printf " no interval specified\n" ;fi
+if [[ -z "$2" ]] ;then printf " no command specified\n" ;fi
+if [[ -z "$3" ]] ;then printf " no action specified\n" ;fi
+if [[ "$3" == add ]] ;then
+    # add cronjob, no duplication:
+    ( sudo crontab -l | grep -v -F -w "$2" ; echo "$1 $2" ) | sudo crontab -
+elif [[ "$3" == remove ]] ;then
+    # remove cronjob:
+    ( sudo crontab -l | grep -v -F -w "$2" ) | sudo crontab -
+fi
+}
+cronjob_editor "$1" "$2" "$3"
+EOF
+sudo chmod +x /usr/local/bin/cronedit.sh
+#
 sudo cat > /opt/conf.txt <<- "EOF"
   
 [D-APRS]
@@ -174,6 +193,7 @@ sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/proxy.cfg
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/menu.sh)"
 #sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
 #data-id
+cronedit.sh '* */6 * * *' 'data-id' remove
 sudo chmod +x /opt/FreeDMR/*.py
 sudo chmod +x /opt/FreeDMR/config/*.py
 sudo chmod +x /opt/extra-1.sh
