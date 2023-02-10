@@ -209,29 +209,6 @@ fi
 sudo chmod +x /opt/extra-*
 
 ###################
-cat > /usr/local/bin/cronedit.sh <<- "EOF"
-cronjob_editor () {
-# usage: cronjob_editor '<interval>' '<command>' <add|remove>
-
-if [[ -z "$1" ]] ;then printf " no interval specified\n" ;fi
-if [[ -z "$2" ]] ;then printf " no command specified\n" ;fi
-if [[ -z "$3" ]] ;then printf " no action specified\n" ;fi
-
-if [[ "$3" == add ]] ;then
-    # add cronjob, no duplication:
-    ( sudo crontab -l | grep -v -F -w "$2" ; echo "$1 $2" ) | sudo crontab -
-elif [[ "$3" == remove ]] ;then
-    # remove cronjob:
-    ( sudo crontab -l | grep -v -F -w "$2" ) | sudo crontab -
-fi
-}
-cronjob_editor "$1" "$2" "$3"
-
-
-EOF
-sudo chmod +x /usr/local/bin/cronedit.sh
-
-##############
 cd /opt
 git clone https://gitlab.hacknix.net/hacknix/FreeDMR.git
 cd FreeDMR
@@ -318,8 +295,6 @@ sudo sed -i 's/ALLOW_NULL_PASSPHRASE: passw0rd False/ALLOW_NULL_PASSPHRASE: Fals
 cp /opt/FreeDMR/FreeDMR-SAMPLE.cfg /opt/FreeDMR-SAMPLE.cfg
 cd /opt/
 cat FreeDMR-SAMPLE.cfg conf.txt obp.txt >> /opt/FreeDMR/config/FreeDMR.cfg
-#sudo sed -i "s/ANNOUNCEMENT_LANGUAGES:.*/ANNOUNCEMENT_LANGUAGES: en_GB,en_GB-2,en_US,es_ES,es_ES-2,fr_FR,de_DE,dk_DK,it_IT,no_NO,pl_PL,se_SE,pt_PT,cy_GB,el_GR,CW/"   /opt/FreeDMR/config/FreeDMR.cfg
-#sudo sed -i 's/REPORT_CLIENTS: 127.0.0.1/REPORT_CLIENTS: */' /opt/FreeDMR/config/FreeDMR.cfg
 sudo sed -i 's/file-timed/console-timed/' /opt/FreeDMR/config/FreeDMR.cfg
 sudo sed -i 's/INFO/DEBUG/' /opt/FreeDMR/config/FreeDMR.cfg
 sudo sed -i 's/freedmr.log/\/var\/log\/FreeDMR\/FreeDMR.log/' /opt/FreeDMR/config/FreeDMR.cfg
@@ -334,16 +309,9 @@ cd /opt/FreeDMR/
 mv loro.cfg /opt/FreeDMR/playback.cfg
 sudo sed -i 's/54915/49061/' /opt/FreeDMR/playback.cfg
 #sudo sed -i "121,129d" /opt/FreeDMR/playback.cfg
-#
-#sed '14 a VALIDATE_SERVER_IDS: True' -i /opt/FreeDMR/config/FreeDMR.cfg
-#sed '105 a override_ident_tg:' -i /opt/FreeDMR/config/FreeDMR.cfg
-
-#######lamp
+########lamp
 sudo apt install mariadb-server php libapache2-mod-php php-zip php-mbstring php-cli php-common php-curl php-xml php-mysql -y
 
-#sudo apt install apache2 -y
-#systemctl restar apache2
-#systemctl enable apache2
 systemctl restart mariadb
 systemctl enable mariadb
 #sudo mysql_secure_installation  --host=localhost --port=3306
