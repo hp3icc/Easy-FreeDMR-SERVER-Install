@@ -7,7 +7,6 @@ sudo systemctl stop fdmrparrot.service
 rm -r /opt/FreeDMR
 cd /opt
 git clone https://gitlab.hacknix.net/hacknix/FreeDMR.git
-#git clone https://github.com/hp3icc/FreeDMR.git
 cd FreeDMR
 mkdir config
 mkdir /var/log/FreeDMR
@@ -112,29 +111,21 @@ sudo sed -i 's/ALLOW_NULL_PASSPHRASE: passw0rd False/ALLOW_NULL_PASSPHRASE: Fals
 cp /opt/FreeDMR/FreeDMR-SAMPLE.cfg /opt/FreeDMR-SAMPLE.cfg
 cd /opt/
 cat FreeDMR-SAMPLE.cfg conf.txt obp.txt >> /opt/FreeDMR/config/FreeDMR.cfg
-#sudo sed -i "s/ANNOUNCEMENT_LANGUAGES:.*/ANNOUNCEMENT_LANGUAGES: en_GB,en_GB-2,en_US,es_ES,es_ES-2,fr_FR,de_DE,dk_DK,it_IT,no_NO,pl_PL,se_SE,pt_PT,cy_GB,el_GR,CW/"   /opt/FreeDMR/config/FreeDMR.cfg
 sudo sed -i 's/file-timed/console-timed/' /opt/FreeDMR/config/FreeDMR.cfg
 sudo sed -i 's/INFO/DEBUG/' /opt/FreeDMR/config/FreeDMR.cfg
 sudo sed -i 's/freedmr.log/\/var\/log\/FreeDMR\/FreeDMR.log/' /opt/FreeDMR/config/FreeDMR.cfg
 sudo sed -i 's/ANNOUNCEMENT_LANGUAGE: en_GB/ANNOUNCEMENT_LANGUAGE: es_ES/' /opt/FreeDMR/config/FreeDMR.cfg
 sudo sed -i 's/VOICE_IDENT: True/VOICE_IDENT: False/' /opt/FreeDMR/config/FreeDMR.cfg
 sudo sed -i "s/SERVER_ID: 0000/SERVER_ID: $variable/g"  /opt/FreeDMR/config/FreeDMR.cfg
-#sudo sed -i 's/REPORT_CLIENTS: 127.0.0.1/REPORT_CLIENTS: */' /opt/FreeDMR/config/FreeDMR.cfg
 sudo sed -i "s/TGID_URL:/#TGID_URL:/g"  /opt/FreeDMR/config/FreeDMR.cfg 
 sed '37 a TGID_URL: https://freedmr.cymru/talkgroups/talkgroup_ids_json.php' -i /opt/FreeDMR/config/FreeDMR.cfg 
-#sed '43 a TOPO_FILE: topography.json' -i /opt/FreeDMR/config/FreeDMR.cfg 
 rm /opt/conf.txt
-#rm /opt/FreeDMR-SAMPLE.cfg
 cd /opt/FreeDMR/
 mv loro.cfg /opt/FreeDMR/playback.cfg
 sudo sed -i 's/54915/49061/' /opt/FreeDMR/playback.cfg
-#sudo sed -i "121,129d" /opt/FreeDMR/playback.cfg
 ######
 cat /opt/rules.txt >> /opt/FreeDMR/config/rules.py
-#sed '14 a VALIDATE_SERVER_IDS: True' -i /opt/FreeDMR/config/FreeDMR.cfg
-#sed '105 a override_ident_tg:' -i /opt/FreeDMR/config/FreeDMR.cfg
 sudo rm /opt/FreeDMR/hotspot_proxy_v2.py
-#sudo rm /opt/FreeDMR/proxy_db.*
 cp /opt/FDMR-Monitor/proxy/* /opt/FreeDMR/ -r
 #####################
 sudo cat > /lib/systemd/system/freedmr.service <<- "EOF"
@@ -188,11 +179,9 @@ sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/proxy_db.py
 #
 sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/proxy.cfg
 sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/proxy.cfg
-#sudo sed -i "56,63d" /opt/FreeDMR/config/FreeDMR.cfg
 ###
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/menu.sh)"
-#sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
-#data-id
+
 cronedit.sh '* */6 * * *' 'data-id' remove
 sudo chmod +x /opt/FreeDMR/*.py
 sudo chmod +x /opt/FreeDMR/config/*.py
