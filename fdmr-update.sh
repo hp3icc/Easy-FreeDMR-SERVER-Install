@@ -171,8 +171,8 @@ sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/proxy.cfg
 #sudo sed -i "56,63d" /opt/FreeDMR/config/FreeDMR.cfg
 ###
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/menu.sh)"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
-data-id
+#sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
+#data-id
 sudo chmod +x /opt/FreeDMR/*.py
 sudo chmod +x /opt/FreeDMR/config/*.py
 rm /opt/FreeDMR-SAMPLE.cfg 
