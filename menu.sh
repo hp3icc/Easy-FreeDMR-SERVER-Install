@@ -34,7 +34,7 @@ sudo systemctl stop fdmrparrot.service && sudo systemctl start fdmrparrot.servic
 6)
 sudo systemctl stop fdmrparrot.service &&  sudo systemctl disable fdmrparrot.service ;;
 7)
-sudo systemctl stop proxy.service && sudo systemctl start proxy.service && sudo systemctl enable proxy.service && sudo systemctl stop freedmr.service && sudo systemctl start freedmr.service && sudo systemctl enable freedmr.service && cronedit.sh '* */6 * * *' 'data-id' add;;
+sudo systemctl stop proxy.service && sudo systemctl start proxy.service && sudo systemctl enable proxy.service && sudo systemctl stop freedmr.service && sudo systemctl start freedmr.service && sudo systemctl enable freedmr.service ;;
 8)
 sudo systemctl stop fdmr_mon.service && sudo rm /opt/FDMR-Monitor/sysinfo/*.rrd && sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh && cronedit.sh '*/5 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/graph.sh' add && cronedit.sh '*/2 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/cpu.sh' add && sudo systemctl enable fdmr_mon.service && sudo systemctl restart http.server-fdmr.service && sudo systemctl enable http.server-fdmr.service && sudo systemctl start fdmr_mon.service;;
 9)
