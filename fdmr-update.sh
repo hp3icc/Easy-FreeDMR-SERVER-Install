@@ -89,7 +89,7 @@ sudo sed -i 's/ALLOW_NULL_PASSPHRASE: True/ALLOW_NULL_PASSPHRASE: False/' /opt/F
 sudo sed -i 's/PASSPHRASE:/PASSPHRASE: passw0rd/' /opt/FreeDMR/FreeDMR-SAMPLE.cfg
 sudo sed -i 's/ALLOW_NULL_PASSPHRASE: passw0rd False/ALLOW_NULL_PASSPHRASE: False/' /opt/FreeDMR/FreeDMR-SAMPLE.cfg
 
-cp /opt/FreeDMR/FreeDMR-SAMPLE.cfg /opt/
+cp /opt/FreeDMR/FreeDMR-SAMPLE.cfg /opt/FreeDMR-SAMPLE.cfg
 cd /opt/
 cat FreeDMR-SAMPLE.cfg conf.txt obp.txt >> /opt/FreeDMR/config/FreeDMR.cfg
 sudo sed -i "s/ANNOUNCEMENT_LANGUAGES:.*/ANNOUNCEMENT_LANGUAGES: en_GB,en_GB-2,en_US,es_ES,es_ES-2,fr_FR,de_DE,dk_DK,it_IT,no_NO,pl_PL,se_SE,pt_PT,cy_GB,el_GR,CW/"   /opt/FreeDMR/config/FreeDMR.cfg
@@ -175,7 +175,6 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER
 #data-id
 sudo chmod +x /opt/FreeDMR/*.py
 sudo chmod +x /opt/FreeDMR/config/*.py
-rm /opt/FreeDMR-SAMPLE.cfg 
 sudo chmod +x /opt/extra-1.sh
 sudo sh /opt/extra-1.sh
 sudo systemctl daemon-reload
