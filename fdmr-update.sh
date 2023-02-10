@@ -1,3 +1,4 @@
+#!/bin/bash
 cd /
 variable=$(grep "SERVER_ID:" /opt/FreeDMR/config/FreeDMR.cfg | tail -c 5)
 sudo systemctl stop freedmr.service
