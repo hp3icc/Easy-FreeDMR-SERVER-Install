@@ -618,8 +618,8 @@ rm /var/log/syslog*
 rm /var/log/*.log*
 
 (crontab -l; echo "* */1 * * * sync ; echo 3 > /proc/sys/vm/drop_caches >/dev/null 2>&1")|awk '!x[$0]++'|crontab -
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
-data-id
+#sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
+#data-id
 #####
 sudo update-rc.d dphys-swapfile remove
 sudo chmod -x /etc/init.d/dphys-swapfile
@@ -656,8 +656,8 @@ sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh
 ######################
 (crontab -l; echo "*/5 * * * * sh /opt/FDMR-Monitor/sysinfo/graph.sh")|awk '!x[$0]++'|crontab -
 (crontab -l; echo "*/2 * * * * sh /opt/FDMR-Monitor/sysinfo/cpu.sh")|awk '!x[$0]++'|crontab -
-(crontab -l; echo "* */6 * * * data-id")|awk '!x[$0]++'|crontab -
-
+#(crontab -l; echo "* */6 * * * data-id")|awk '!x[$0]++'|crontab -
+cronedit.sh '* */6 * * *' 'data-id' remove
 sudo systemctl enable fdmr_mon.service
 #sudo systemctl restart apache2.service
 #sudo systemctl enable apache2.service
