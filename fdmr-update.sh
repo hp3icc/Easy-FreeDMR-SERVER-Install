@@ -6,7 +6,7 @@ sudo systemctl stop fdmrparrot.service
 rm -r /opt/FreeDMR
 cd /opt
 git clone https://gitlab.hacknix.net/hacknix/FreeDMR.git
-#git clone https://github.com/hp3icc/FreeDMR.git
+#git clone https://gitlab.com/hp3icc/FreeDMR.git
 cd FreeDMR
 mkdir config
 mkdir /var/log/FreeDMR
@@ -169,8 +169,8 @@ sudo sed -i "s/root/emqte1/g"  /opt/FreeDMR/proxy.cfg
 sudo sed -i "s/test/selfcare/g"  /opt/FreeDMR/proxy.cfg
 #sudo sed -i "56,63d" /opt/FreeDMR/config/FreeDMR.cfg
 ###
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/menu.sh)"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
+sh -c "$(curl -fsSL https://gitlab.com/hp3icc/Easy-FreeDMR-SERVER-Install/-/raw/main/menu.sh)"
+sh -c "$(curl -fsSL https://gitlab.com/hp3icc/emq-TE1ws/-/raw/main/self/data-id-update.sh)"
 data-id
 sudo chmod +x /opt/FreeDMR/*.py
 sudo chmod +x /opt/FreeDMR/config/*.py

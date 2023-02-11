@@ -38,7 +38,7 @@ sudo systemctl stop proxy.service && sudo systemctl start proxy.service && sudo 
 8)
 sudo systemctl stop fdmr_mon.service && sudo rm /opt/FDMR-Monitor/sysinfo/*.rrd && sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh && cronedit.sh '*/5 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/graph.sh' add && cronedit.sh '*/2 * * * *' 'sh /opt/FDMR-Monitor/sysinfo/cpu.sh' add && sudo systemctl enable fdmr_mon.service && sudo systemctl restart http.server-fdmr.service && sudo systemctl enable http.server-fdmr.service && sudo systemctl start fdmr_mon.service;;
 9)
-sh -c "$(curl -fsSL https://github.com/hp3icc/Easy-FreeDMR-SERVER-Install/raw/main/update.sh)";
+sh -c "$(curl -fsSL https://gitlab.com/hp3icc/Easy-FreeDMR-SERVER-Install/raw/main/update.sh)";
 esac
 done
 exit 0

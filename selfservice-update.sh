@@ -159,7 +159,7 @@ sed '64 a #TGID_URL = https://freedmr.cymru/talkgroups/talkgroup_ids_flags_json.
 sudo rm /opt/FDMR-Monitor/data/*
 cd /opt/FDMR-Monitor/
 sudo rm /opt/FDMR-Monitor/install.sh
-wget https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/install.sh
+wget https://gitlab.com/hp3icc/emq-TE1ws/-/raw/main/self/install.sh
 chmod +x /opt/FDMR-Monitor/install.sh
 #
 sh /opt/FDMR-Monitor/install.sh
@@ -182,8 +182,8 @@ sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh
 #sed '35 a -->' -i /var/www/html/sysinfo.php
 
 cp -r /opt/FDMR-Monitor/sysinfo/ /var/fdmr/html/sysinfo/
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/menu.sh)"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
+sh -c "$(curl -fsSL https://gitlab.com/hp3icc/Easy-FreeDMR-SERVER-Install/-/raw/main/menu.sh)"
+sh -c "$(curl -fsSL https://gitlab.com/hp3icc/emq-TE1ws/-/raw/main/self/data-id-update.sh)"
 data-id
 #sudo rm mon.db
 #sudo python3 mon_db.py
