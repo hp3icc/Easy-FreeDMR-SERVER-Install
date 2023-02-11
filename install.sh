@@ -59,24 +59,6 @@ sudo apt-get install python-pip -y
 sudo apt-get install python-dev -y
 sudo apt-get install rrdtool -y
 #
-cat > /usr/local/bin/cronedit.sh <<- "EOF"
-cronjob_editor () {
-# usage: cronjob_editor '<interval>' '<command>' <add|remove>
-if [[ -z "$1" ]] ;then printf " no interval specified\n" ;fi
-if [[ -z "$2" ]] ;then printf " no command specified\n" ;fi
-if [[ -z "$3" ]] ;then printf " no action specified\n" ;fi
-if [[ "$3" == add ]] ;then
-    # add cronjob, no duplication:
-    ( sudo crontab -l | grep -v -F -w "$2" ; echo "$1 $2" ) | sudo crontab -
-elif [[ "$3" == remove ]] ;then
-    # remove cronjob:
-    ( sudo crontab -l | grep -v -F -w "$2" ) | sudo crontab -
-fi
-}
-cronjob_editor "$1" "$2" "$3"
-EOF
-sudo chmod +x /usr/local/bin/cronedit.sh
-#
 if [ -d "/opt/FreeDMR" ];
 then
    sudo rm /opt/FreeDMR/ -r
@@ -209,6 +191,29 @@ fi
 sudo chmod +x /opt/extra-*
 
 ###################
+cat > /usr/local/bin/cronedit.sh <<- "EOF"
+cronjob_editor () {
+# usage: cronjob_editor '<interval>' '<command>' <add|remove>
+
+if [[ -z "$1" ]] ;then printf " no interval specified\n" ;fi
+if [[ -z "$2" ]] ;then printf " no command specified\n" ;fi
+if [[ -z "$3" ]] ;then printf " no action specified\n" ;fi
+
+if [[ "$3" == add ]] ;then
+    # add cronjob, no duplication:
+    ( sudo crontab -l | grep -v -F -w "$2" ; echo "$1 $2" ) | sudo crontab -
+elif [[ "$3" == remove ]] ;then
+    # remove cronjob:
+    ( sudo crontab -l | grep -v -F -w "$2" ) | sudo crontab -
+fi
+}
+cronjob_editor "$1" "$2" "$3"
+
+
+EOF
+sudo chmod +x /usr/local/bin/cronedit.sh
+
+##############
 cd /opt
 git clone https://gitlab.hacknix.net/hacknix/FreeDMR.git
 cd FreeDMR
@@ -292,9 +297,10 @@ sudo sed -i 's/ALLOW_NULL_PASSPHRASE: True/ALLOW_NULL_PASSPHRASE: False/' /opt/F
 sudo sed -i 's/PASSPHRASE:/PASSPHRASE: passw0rd/' /opt/FreeDMR/FreeDMR-SAMPLE.cfg
 sudo sed -i 's/ALLOW_NULL_PASSPHRASE: passw0rd False/ALLOW_NULL_PASSPHRASE: False/' /opt/FreeDMR/FreeDMR-SAMPLE.cfg
 
-cp /opt/FreeDMR/FreeDMR-SAMPLE.cfg /opt/FreeDMR-SAMPLE.cfg
+cp /opt/FreeDMR/FreeDMR-SAMPLE.cfg /opt/
 cd /opt/
 cat FreeDMR-SAMPLE.cfg conf.txt obp.txt >> /opt/FreeDMR/config/FreeDMR.cfg
+#sudo sed -i 's/REPORT_CLIENTS: 127.0.0.1/REPORT_CLIENTS: */' /opt/FreeDMR/config/FreeDMR.cfg
 sudo sed -i 's/file-timed/console-timed/' /opt/FreeDMR/config/FreeDMR.cfg
 sudo sed -i 's/INFO/DEBUG/' /opt/FreeDMR/config/FreeDMR.cfg
 sudo sed -i 's/freedmr.log/\/var\/log\/FreeDMR\/FreeDMR.log/' /opt/FreeDMR/config/FreeDMR.cfg
@@ -303,15 +309,22 @@ sudo sed -i 's/VOICE_IDENT: True/VOICE_IDENT: False/' /opt/FreeDMR/config/FreeDM
 sudo sed -i "s/TGID_URL:/#TGID_URL:/g"  /opt/FreeDMR/config/FreeDMR.cfg 
 sed '37 a TGID_URL: https://freedmr.cymru/talkgroups/talkgroup_ids_json.php' -i /opt/FreeDMR/config/FreeDMR.cfg 
 #sed '43 a TOPO_FILE: topography.json' -i /opt/FreeDMR/config/FreeDMR.cfg
-#rm /opt/FreeDMR-SAMPLE.cfg
-rm /opt/conf.txt
+
+rm /opt/FreeDMR/conf.txt
 cd /opt/FreeDMR/
 mv loro.cfg /opt/FreeDMR/playback.cfg
 sudo sed -i 's/54915/49061/' /opt/FreeDMR/playback.cfg
 #sudo sed -i "121,129d" /opt/FreeDMR/playback.cfg
-########lamp
+#
+#sed '14 a VALIDATE_SERVER_IDS: True' -i /opt/FreeDMR/config/FreeDMR.cfg
+#sed '105 a override_ident_tg:' -i /opt/FreeDMR/config/FreeDMR.cfg
+
+#######lamp
 sudo apt install mariadb-server php libapache2-mod-php php-zip php-mbstring php-cli php-common php-curl php-xml php-mysql -y
 
+#sudo apt install apache2 -y
+#systemctl restar apache2
+#systemctl enable apache2
 systemctl restart mariadb
 systemctl enable mariadb
 #sudo mysql_secure_installation  --host=localhost --port=3306
@@ -605,8 +618,8 @@ rm /var/log/syslog*
 rm /var/log/*.log*
 
 (crontab -l; echo "* */1 * * * sync ; echo 3 > /proc/sys/vm/drop_caches >/dev/null 2>&1")|awk '!x[$0]++'|crontab -
-#sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
-#data-id
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
+data-id
 #####
 sudo update-rc.d dphys-swapfile remove
 sudo chmod -x /etc/init.d/dphys-swapfile
@@ -643,8 +656,8 @@ sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh
 ######################
 (crontab -l; echo "*/5 * * * * sh /opt/FDMR-Monitor/sysinfo/graph.sh")|awk '!x[$0]++'|crontab -
 (crontab -l; echo "*/2 * * * * sh /opt/FDMR-Monitor/sysinfo/cpu.sh")|awk '!x[$0]++'|crontab -
-#(crontab -l; echo "* */6 * * * data-id")|awk '!x[$0]++'|crontab -
-cronedit.sh '* */6 * * *' 'data-id' remove
+(crontab -l; echo "* */6 * * * data-id")|awk '!x[$0]++'|crontab -
+
 sudo systemctl enable fdmr_mon.service
 #sudo systemctl restart apache2.service
 #sudo systemctl enable apache2.service

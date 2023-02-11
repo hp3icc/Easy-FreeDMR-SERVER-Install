@@ -181,11 +181,10 @@ sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh
 #sed '33 a <!--' -i /var/www/html/sysinfo.php
 #sed '35 a -->' -i /var/www/html/sysinfo.php
 
-cp -r /opt/FDMR-Monitor/sysinfo/ /var/www/fdmr/sysinfo/
+cp -r /opt/FDMR-Monitor/sysinfo/ /var/fdmr/html/sysinfo/
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/menu.sh)"
-#sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
-#data-id
-cronedit.sh '* */6 * * *' 'data-id' remove
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
+data-id
 #sudo rm mon.db
 #sudo python3 mon_db.py
 sudo systemctl daemon-reload	
