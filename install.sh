@@ -656,7 +656,7 @@ sh /opt/FDMR-Monitor/sysinfo/rrd-db.sh
 ######################
 (crontab -l; echo "*/5 * * * * sh /opt/FDMR-Monitor/sysinfo/graph.sh")|awk '!x[$0]++'|crontab -
 (crontab -l; echo "*/2 * * * * sh /opt/FDMR-Monitor/sysinfo/cpu.sh")|awk '!x[$0]++'|crontab -
-(crontab -l; echo "* */24 * * * data-id")|awk '!x[$0]++'|crontab -
+#(crontab -l; echo "* */24 * * * data-id")|awk '!x[$0]++'|crontab -
 
 sudo systemctl enable fdmr_mon.service
 #sudo systemctl restart apache2.service
@@ -669,4 +669,3 @@ chmod +x /bin/MENU
 history -c && history -w
 menu
 #####
-
