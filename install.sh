@@ -133,7 +133,7 @@ sudo chmod +777 /var/log
 sudo chmod +777 /var/log/*
 
 #
-sh -c "$(curl -fsSL https://gitlab.com/hp3icc/Easy-FreeDMR-SERVER-Install/-/raw/main/menu.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/menu.sh)"
 
 ########################
 if [ -f "/opt/obp.txt" ]
@@ -459,7 +459,7 @@ sed '63 a TGID_URL = https://freedmr.cymru/talkgroups/talkgroup_ids_json.php' -i
 sed '64 a #TGID_URL = https://freedmr.cymru/talkgroups/talkgroup_ids_flags_json.php' -i /opt/FDMR-Monitor/fdmr-mon_SAMPLE.cfg
 cd /opt/FDMR-Monitor/
 sudo rm /opt/FDMR-Monitor/install.sh
-wget https://gitlab.com/hp3icc/emq-TE1ws/-/raw/main/self/install.sh
+wget https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/install.sh
 sudo chmod +x /opt/FDMR-Monitor/install.sh
 sudo chmod +x /opt/FDMR-Monitor/*.py
 #
@@ -618,7 +618,7 @@ rm /var/log/syslog*
 rm /var/log/*.log*
 
 (crontab -l; echo "* */1 * * * sync ; echo 3 > /proc/sys/vm/drop_caches >/dev/null 2>&1")|awk '!x[$0]++'|crontab -
-sh -c "$(curl -fsSL https://gitlab.com/hp3icc/emq-TE1ws/-/raw/main/self/data-id-update.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/emq-TE1ws/main/self/data-id-update.sh)"
 data-id
 #####
 sudo update-rc.d dphys-swapfile remove

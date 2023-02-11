@@ -57,7 +57,7 @@ sudo nano /opt/rules.txt ;;
 3)
 sudo nano /opt/extra-1.sh && chmod +x /opt/extra* ;;
 4)
-sh -c "$(curl -fsSL https://gitlab.com/hp3icc/Easy-FreeDMR-SERVER-Install/-/raw/main/fdmr-update.sh)" ;;
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/fdmr-update.sh)" ;;
 5)
 break;
 esac
@@ -87,7 +87,7 @@ case $choix in
 1)
 sudo nano /opt/extra-2.sh && chmod +x /opt/extra* ;;
 2)
-sh -c "$(curl -fsSL https://gitlab.com/hp3icc/Easy-FreeDMR-SERVER-Install/-/raw/main/selfservice-update.sh)" ;;
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/hp3icc/Easy-FreeDMR-SERVER-Install/main/selfservice-update.sh)" ;;
 3)
 break;
 esac
