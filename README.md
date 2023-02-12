@@ -28,10 +28,10 @@ need have curl and sudo installed
 
 into your ssh terminal copy and paste the following link :
 
-  apt-get update
-  apt-get install curl sudo -y
+    apt-get update
+    apt-get install curl sudo -y
 
-  sh -c "$(curl -fsSL https://gitlab.com/hp3icc/fdmr/-/raw/main/install.sh)"
+    sh -c "$(curl -fsSL https://gitlab.com/hp3icc/fdmr/-/raw/main/install.sh)"
 
              
              
