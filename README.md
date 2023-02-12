@@ -43,7 +43,7 @@ into your ssh terminal copy and paste the following link :
  
   At the end of the installation your freedmr server will be installed and working, a menu will be displayed that will make it easier for you to edit, restart or update your server and dashboard to future versions.
   
-  to use the options menu, just type menu in your ssh terminal or console.
+ to use the options menu, just type "menu-fdmr" without the quotes in your ssh terminal or console.
   
  #
  
